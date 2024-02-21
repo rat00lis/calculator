@@ -5,19 +5,6 @@ let DISPLAY = document.querySelector(".display");
 let NEW_NUMBER = false;
 let ERROR_MESSAGE = 'error';
 
-function addNumbersListeners(){
-    let numbers = document.querySelectorAll(".number");
-    numbers.forEach(function (number) {
-        number.addEventListener('click', () => numberPressed(number));
-    });
-}
-
-function addOperatorsListeners(){
-    let operators = document.querySelectorAll(".operator");
-    operators.forEach(function (operator) {
-        operator.addEventListener('click', () => operatorPressed(operator));
-    });
-}
 
 function updateDisplay(content){
     //se actualiza el texto
