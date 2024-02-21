@@ -1,9 +1,10 @@
 body{
     --purple: #7360DF;
     --pink: #F2AFEF;
+    --light-pink: #f4c2f1;
     --light-purple: #C499F3;
     --dark-blue: #33186B; 
-    background-color: var(--pink);
+    background-color: var(--light-pink);
     font-family:'Courier New', Courier, monospace;
 }
 .container{
@@ -16,6 +17,7 @@ body{
     background-color: var(--dark-blue);
     padding: 20px;
     border-radius: 12px;
+    border: 6px double var(--purple);
 }
     .display{
         width: 100%;
@@ -23,6 +25,13 @@ body{
         border: 5px outset var(--dark-blue);
         background-color: #474F7A;
         margin: 5px;
+        font-size: 25px;
+        text-align: center;
+        /* make it sit in the horizontal middle */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ffe9fe;
     }
     .row{
         display: flex;
