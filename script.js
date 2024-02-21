@@ -10,12 +10,19 @@ function updateDisplay(content){
     //se actualiza el texto
     DISPLAY.textContent = content;
 }
+function cleanInput(input){
+    return input.replace(/[^+\-\=\/x]/g, '');
+}
+
+function clearDisplay(){
+    DISPLAY.textContent = '';
+}
 
 function operate(firstNumber, secondNumber, operator){
     //case switch needs a break line or
     //they might bug
     // replace only takes the operation from string
-    switch (operator.replace(/[^+\-\/x]/g, '')){
+    switch (cleanInput(operator)){
         case 'x':
             return firstNumber * secondNumber;
         case '+':
@@ -24,16 +31,17 @@ function operate(firstNumber, secondNumber, operator){
             return firstNumber - secondNumber;
         case '/':
             return firstNumber / secondNumber;
+        case '=':
+            return null;
     }
-}
-
-function clearDisplay(){
-    DISPLAY.textContent = '';
 }
 
 function operatorPressed(operator){
     let secondNumber = parseInt(DISPLAY.textContent);
-    
+
+    //this is made 
+    if(CURRENT_OPERATION && cleanInput(CURRENT_OPERATION)=='=')FIRST_NUMBER = false;
+
     //if there's no firstnumber created, you need
     // to create it with the actual one in display
     if(!FIRST_NUMBER){
@@ -70,5 +78,3 @@ function numberPressed(number){
         updateDisplay(contentToDisplay);
     }
 }
-addNumbersListeners();
-addOperatorsListeners();
