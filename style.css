@@ -37,6 +37,14 @@ body{
         background-color: var(--purple);
         color: var(--light-purple);
         font-size: 25px;
+        font-family: inherit;
+    }
+    .row.largebuttons{
+        justify-content: space-around;
+    }
+    .clear{
+        width: 100px;
+        height: 30px;
     }
     button:hover{
         background-color: var(--pink);
