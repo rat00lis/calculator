@@ -2,32 +2,29 @@ let CURRENT_OPERATION = null;
 let FIRST_NUMBER = null;
 let DISPLAY = document.querySelector(".display");
 let NEW_NUMBER = false;
-let ERROR_MESSAGE = 'error';
+let ERROR_MESSAGE = 'erroooorr';
 const SPACE_DISPLAY = 13;
 
+
+
 function formatNumber(number) {
-    let numberString = number.toString();
-  
-    // If the number converted to string exceeds 10 characters
-    if (numberString.length > SPACE_DISPLAY) {
-      // Try to convert to scientific notation if it's a very large or very small number
-      if (number > 1e9 || number < 1e-9) {
-        numberString = number.toExponential();
-        numberString = numberString.slice(0, SPACE_DISPLAY);
-      } else {
-        // Truncate decimals if the number is not extremely large or small
-        const decimalPointIndex = numberString.indexOf('.');
-        const decimalPlaces = SPACE_DISPLAY - decimalPointIndex - 1;
-        numberString = number.toFixed(decimalPlaces > 0 ? decimalPlaces : 0);
-      }
+    
+    if(number==Infinity)return ERROR_MESSAGE;
+    let textFormOfNumber = number.toString();
+    if(textFormOfNumber.length >= SPACE_DISPLAY){
+        //first we take care of the decimal part
+        //how much space is left for decimals
+        let decimalSpaces = SPACE_DISPLAY - textFormOfNumber.split('.')[0].length;
+        if (decimalSpaces < 0) decimalSpaces = 0;
+        textFormOfNumber = number.toFixed(decimalSpaces).toString();
+
+        //now if it still doesnt fit, we gonna use notation
+        if(textFormOfNumber.length >= SPACE_DISPLAY){
+            return parseFloat(textFormOfNumber).toExponential();
+        }
     }
-  
-    // Ensure the final string does not exceed 10 characters, including the decimal point
-    if (numberString.length > SPACE_DISPLAY) {
-      numberString = numberString.slice(0, SPACE_DISPLAY);
-    }
-  
-    return numberString;
+    // return numberString;
+    return textFormOfNumber;
   }
   
 
@@ -75,7 +72,7 @@ function operatorPressed(operator){
         let secondNumber = parseFloat(DISPLAY.textContent);
 
         //SHOW ERROR IF THERE IS MORE THAN ONE .
-        if(DISPLAY.textContent.split('.').length > 1 || toString(FIRST_NUMBER).split('.').length > 1){
+        if(DISPLAY.textContent.split('.').length > 2 || toString(FIRST_NUMBER).split('.').length > 2){
             FIRST_NUMBER = null;
             NEW_NUMBER = false;
             CURRENT_OPERATION = null;
@@ -116,9 +113,6 @@ function operatorPressed(operator){
 }
 
 function numberPressed(number){
-
-    if(cleanInput(DISPLAY.textContent).length >= SPACE_DISPLAY) return;
-
     let contentToDisplay = '';
     let numberExtracted = cleanInput(number.textContent);
     let displayNumber = cleanInput(DISPLAY.textContent) || '';
@@ -130,7 +124,9 @@ function numberPressed(number){
         updateDisplay(contentToDisplay);
         NEW_NUMBER = false;
     }else{
+        if(cleanInput(DISPLAY.textContent).length >= SPACE_DISPLAY) return;
         contentToDisplay = `${displayNumber}${numberExtracted}`;
         updateDisplay(contentToDisplay);
     }
 }
+
