@@ -13,7 +13,7 @@ DISPLAY.addEventListener('keyup', function(event) {
         return
     };
     const allowedKeysNumbers = '0123456789'
-    const allowedKeysOperators = '.=/+-x'
+    const allowedKeysOperators = '.=/+-xX'
     if(allowedKeysNumbers.includes(key)){
         const keyObject = {
             textContent: key
@@ -56,7 +56,7 @@ function updateDisplay(content){
     DISPLAY.textContent = content;
 }
 function cleanInput(input){
-    return input.replace(/[^+\-\.\=\/x0-9]/g, '');
+    return input.replace(/[^+\-\.\=\/xX0-9]/g, '');
 }
 
 function clearDisplay(eraseNumbers = false){
@@ -71,7 +71,7 @@ function operate(firstNumber, secondNumber, operator){
     //they might bug
     // replace only takes the operation from string
     switch (cleanInput(operator)){
-        case 'x':
+        case ('x'||'X'):
             return firstNumber * secondNumber;
         case '+':
             return firstNumber + secondNumber;
