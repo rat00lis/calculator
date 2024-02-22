@@ -12,7 +12,7 @@ DISPLAY.addEventListener('keyup', function(event) {
         operatorPressed(keyObject = {textContent: '='});
         return
     };
-    const allowedKeysNumbers = '123456789'
+    const allowedKeysNumbers = '0123456789'
     const allowedKeysOperators = '.=/+-x'
     if(allowedKeysNumbers.includes(key)){
         const keyObject = {
