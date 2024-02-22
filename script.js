@@ -5,10 +5,33 @@ let NEW_NUMBER = false;
 let ERROR_MESSAGE = 'erroooorr';
 const SPACE_DISPLAY = 13;
 
-
+DISPLAY.addEventListener('keyup', function(event) {
+    event.preventDefault();
+    const key = event.key;
+    if (key=='Enter'){
+        operatorPressed(keyObject = {textContent: '='});
+        return
+    };
+    const allowedKeysNumbers = '123456789'
+    const allowedKeysOperators = '.=/+-x'
+    if(allowedKeysNumbers.includes(key)){
+        const keyObject = {
+            textContent: key
+        }
+        numberPressed(keyObject);
+        return;
+    }
+    else if(allowedKeysOperators.includes(key)){
+        const keyObject = {
+            textContent: key
+        }
+        operatorPressed(keyObject);
+        return;
+    }
+});
 
 function formatNumber(number) {
-    
+
     if(number==Infinity)return ERROR_MESSAGE;
     let textFormOfNumber = number.toString();
     if(textFormOfNumber.length >= SPACE_DISPLAY){
